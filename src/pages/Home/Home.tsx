@@ -1,11 +1,15 @@
-import { Navbar } from '../../components/Navbar';
-import { HeroSection } from '../../components/HeroSection';
+import { Navbar } from '../../components';
+import { HeroSection } from '../../components';
+import { FavoriteMovies } from '../../components';
 
 export const Home = () => {
 	return (
-		<header>
-			<Navbar />
-			<HeroSection />
-		</header>
+		<>
+			<header>
+				<Navbar />
+				<HeroSection />
+			</header>
+			<FavoriteMovies />
+		</>
 	);
 };
