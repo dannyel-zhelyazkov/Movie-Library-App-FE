@@ -16,6 +16,10 @@ const SearchInput = styled.input`
 	width: 20rem;
 	margin-right: 1rem;
 
+	&:focus-within {
+		outline: 2px solid ${({ theme }) => theme.colors.secondary};
+	}
+
 	@media (max-width: ${({ theme }) => theme.devicesWidths.mobile}) {
 		width: 100%;
 		margin-bottom: 0.5rem;

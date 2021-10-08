@@ -15,7 +15,7 @@ export const theme = {
 	},
 	devicesWidths: {
 		mobile: '480px',
-		tablets: '781px',
+		tablet: '781px',
 	},
 };
 
