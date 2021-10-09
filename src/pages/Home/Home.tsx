@@ -1,3 +1,13 @@
+import { HeroSection } from '../../components';
+import { FavoriteMovies } from '../../components';
+
 export const Home = () => {
-	return <h1>Home Page</h1>;
+	return (
+		<>
+			<header>
+				<HeroSection />
+			</header>
+			<FavoriteMovies />
+		</>
+	);
 };
