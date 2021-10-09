@@ -16,6 +16,7 @@ export const theme = {
 	devicesWidths: {
 		mobile: '480px',
 		tablet: '781px',
+		smallScreens: '1024px',
 	},
 };
 

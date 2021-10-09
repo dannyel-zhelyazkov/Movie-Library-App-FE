@@ -10,15 +10,11 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
 	border: none;
-	outline: none;
+	outline: 2px solid ${({ theme }) => theme.colors.secondary};
 	border-radius: 4px;
 	padding: 0.75rem;
 	width: 20rem;
 	margin-right: 1rem;
-
-	&:focus-within {
-		outline: 2px solid ${({ theme }) => theme.colors.secondary};
-	}
 
 	@media (max-width: ${({ theme }) => theme.devicesWidths.mobile}) {
 		width: 100%;

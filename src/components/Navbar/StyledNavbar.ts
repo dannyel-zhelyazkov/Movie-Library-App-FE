@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavbarContainer = styled.nav`
@@ -5,7 +6,7 @@ const NavbarContainer = styled.nav`
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	height: 4rem;
+	height: 5rem;
 	background-color: ${({ theme }) => theme.colors.primary};
 	padding: 0 1rem;
 
@@ -21,7 +22,9 @@ const NavbarContainer = styled.nav`
 	}
 `;
 
-const MyMovieCollectionText = styled.span`
+const MyMovieCollectionText = styled(NavLink)`
+	font-size: ${({ theme }) => theme.fontSize.large};
+	text-decoration: none;
 	font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 	color: ${({ theme }) => theme.colors.secondary};
 `;

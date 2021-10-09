@@ -5,7 +5,9 @@ export const Navbar = () => {
 	return (
 		<NavbarContainer>
 			<div>
-				<MyMovieCollectionText>My Movie Collection</MyMovieCollectionText>
+				<MyMovieCollectionText to="/">
+					My Movie Collection
+				</MyMovieCollectionText>
 			</div>
 			<Search />
 		</NavbarContainer>

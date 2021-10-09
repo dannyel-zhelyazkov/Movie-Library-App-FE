@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router';
+import { MoviePoster } from '..';
 import { Pagination } from '../Pagination';
 import {
 	FavoriteMoviesContainer,
 	FavoriteMoviesHeader,
 	FavoriteMoviesList,
-	FavoriteMovie,
+	FavoriteMovieWrapper,
 } from './StyledFavoriteMovies';
 
 export const FavoriteMovies = () => {
@@ -23,14 +24,15 @@ export const FavoriteMovies = () => {
 			<FavoriteMoviesHeader>Your Favorite</FavoriteMoviesHeader>
 			<FavoriteMoviesList container spacing={2}>
 				{[1, 2, 3, 4].map((id: number) => (
-					<FavoriteMovie
+					<FavoriteMovieWrapper
 						item
 						xs={6}
 						sm={4}
 						m={3}
 						lg={2}
-						onClick={() => handlePushToDetailsPage(id)}
-					/>
+						onClick={() => handlePushToDetailsPage(id)}>
+						<MoviePoster />
+					</FavoriteMovieWrapper>
 				))}
 			</FavoriteMoviesList>
 			<Pagination count={10} />
