@@ -12,7 +12,7 @@ export const MovieDetails = () => {
 	return (
 		<MovieDetailsContainer>
 			<MovieDetailsContent>
-				<MovieItem />
+				<MovieItem isDetailsPage />
 			</MovieDetailsContent>
 
 			<MovieDetailsReview>

@@ -20,15 +20,4 @@ const SearchSection = styled.div`
 	margin-bottom: 3rem;
 `;
 
-const MoviesList = styled.ul`
-	display: flex;
-	flex-direction: column;
-	list-style: none;
-	align-items: center;
-
-	& > li {
-		margin-bottom: 2rem;
-	}
-`;
-
-export { SearchMoviesContainer, SearchMoviesHeader, SearchSection, MoviesList };
+export { SearchMoviesContainer, SearchMoviesHeader, SearchSection };
