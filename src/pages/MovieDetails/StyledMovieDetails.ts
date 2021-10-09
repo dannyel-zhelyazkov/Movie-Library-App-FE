@@ -22,6 +22,11 @@ const MovieDetailsReviewHeader = styled.h3`
 
 const MovieDetailsReviewRating = styled(Rating)`
 	margin-bottom: 1rem;
+	width: fit-content;
+
+	& > label > span.MuiRating-iconFilled {
+		color: ${({ theme }) => theme.colors.secondary};
+	}
 `;
 
 const MovieDetailsNote = styled.textarea`

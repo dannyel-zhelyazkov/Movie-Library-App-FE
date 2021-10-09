@@ -12,6 +12,8 @@ export const theme = {
 	},
 	fontSize: {
 		large: '18px',
+		heading: '20px',
+		bigHeading: '22px',
 	},
 	devicesWidths: {
 		mobile: '480px',

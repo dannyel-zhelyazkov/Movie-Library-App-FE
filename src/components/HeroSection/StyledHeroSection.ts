@@ -47,12 +47,12 @@ const HeroSectionHeading = styled.h1`
 	color: ${({ theme }) => theme.colors.secondary};
 
 	@media (max-width: ${({ theme }) => theme.devicesWidths.mobile}) {
-		font-size: 20px;
+		font-size: ${({ theme }) => theme.fontSize.heading};
 	}
 `;
 
 const HeroSectionParagraph = styled.p`
-	font-size: 22px;
+	font-size: ${({ theme }) => theme.fontSize.bigHeading};
 	color: ${({ theme }) => theme.colors.white};
 
 	& > span {
@@ -61,7 +61,7 @@ const HeroSectionParagraph = styled.p`
 	}
 
 	@media (max-width: ${({ theme }) => theme.devicesWidths.mobile}) {
-		font-size: 18px;
+		font-size: ${({ theme }) => theme.fontSize.large};
 	}
 `;
 

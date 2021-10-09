@@ -22,19 +22,4 @@ const SearchInput = styled.input`
 	}
 `;
 
-const SearchButton = styled.button`
-	outline: none;
-	border: none;
-	padding: 0.75rem 1rem;
-	border-radius: 4px;
-	background-color: ${({ theme }) => theme.colors.secondary};
-	color: ${({ theme }) => theme.colors.white};
-	font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-	cursor: pointer;
-
-	@media (max-width: ${({ theme }) => theme.devicesWidths.mobile}) {
-		margin-bottom: 0.5rem;
-	}
-`;
-
-export { SearchContainer, SearchInput, SearchButton };
+export { SearchContainer, SearchInput };

@@ -1,6 +1,5 @@
-import { MovieItem, Pagination, Search } from '../../components';
+import { MoviesSearchList, Pagination, Search } from '../../components';
 import {
-	MoviesList,
 	SearchMoviesContainer,
 	SearchMoviesHeader,
 	SearchSection,
@@ -13,13 +12,7 @@ export const SearchMovies = () => {
 				<SearchMoviesHeader>Search</SearchMoviesHeader>
 				<Search />
 			</SearchSection>
-			<MoviesList>
-				{[1, 2, 3].map(() => (
-					<li>
-						<MovieItem />
-					</li>
-				))}
-			</MoviesList>
+			<MoviesSearchList />
 			<Pagination count={3} />
 		</SearchMoviesContainer>
 	);
