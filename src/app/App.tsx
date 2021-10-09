@@ -1,10 +1,13 @@
+import { Navbar } from '../components';
 import { Theme } from '../const';
 import { AppRouter } from './AppRouter';
 
 export const App = () => {
 	return (
 		<Theme>
-			<AppRouter />
+			<AppRouter>
+				<Navbar />
+			</AppRouter>
 		</Theme>
 	);
 };
