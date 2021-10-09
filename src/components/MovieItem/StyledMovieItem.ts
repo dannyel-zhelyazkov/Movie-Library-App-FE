@@ -15,7 +15,11 @@ const MovieItemContent = styled.div`
 `;
 
 const MovieItemContentDescription = styled.p`
-	width: 25rem;
+	width: 50rem;
+
+	@media (max-width: ${({ theme }) => theme.devicesWidths.tablet}) {
+		width: 30rem;
+	}
 
 	@media (max-width: ${({ theme }) => theme.devicesWidths.mobile}) {
 		display: none;
