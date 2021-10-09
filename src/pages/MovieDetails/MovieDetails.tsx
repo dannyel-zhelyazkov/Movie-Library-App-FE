@@ -1,3 +1,25 @@
+import { MovieItem } from '../../components';
+import {
+	MovieDetailsContainer,
+	MovieDetailsContent,
+	MovieDetailsReview,
+	MovieDetailsReviewHeader,
+	MovieDetailsReviewRating,
+	MovieDetailsNote,
+} from './StyledMovieDetails';
+
 export const MovieDetails = () => {
-	return <h1>Movie Details</h1>;
+	return (
+		<MovieDetailsContainer>
+			<MovieDetailsContent>
+				<MovieItem />
+			</MovieDetailsContent>
+
+			<MovieDetailsReview>
+				<MovieDetailsReviewHeader>Your Review</MovieDetailsReviewHeader>
+				<MovieDetailsReviewRating size="large" />
+				<MovieDetailsNote placeholder="Your private notes and comments about the movie..." />
+			</MovieDetailsReview>
+		</MovieDetailsContainer>
+	);
 };
