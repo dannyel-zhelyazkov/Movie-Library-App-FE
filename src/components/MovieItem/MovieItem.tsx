@@ -66,7 +66,7 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 					</VisitOfficialSiteLink>
 				</CardContent>
 				<CardActions disableSpacing>
-					<FavoriteButton isFavorite />
+					<FavoriteButton />
 				</CardActions>
 			</MovieItemContent>
 		</MovieItemContainer>
