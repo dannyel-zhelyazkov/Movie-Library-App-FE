@@ -7,6 +7,7 @@ const MoviesList = styled.ul`
 	align-items: center;
 
 	& > li {
+		width: 100%;
 		margin-bottom: 2rem;
 	}
 `;
