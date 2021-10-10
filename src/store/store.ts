@@ -1,7 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { searchReducer } from './slices';
 
 export const store = configureStore({
-	reducer: {},
+	reducer: {
+		search: searchReducer,
+	},
+	devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type AppDispatch = typeof store.dispatch;

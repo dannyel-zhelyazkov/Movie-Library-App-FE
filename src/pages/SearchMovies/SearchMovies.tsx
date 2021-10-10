@@ -1,4 +1,5 @@
 import { MoviesSearchList, Pagination, Search } from '../../components';
+import { useSearch } from '../../hooks/useSearch';
 import {
 	SearchMoviesContainer,
 	SearchMoviesHeader,
@@ -6,14 +7,32 @@ import {
 } from './StyledSearchMovies';
 
 export const SearchMovies = () => {
+	const {
+		movies,
+		page,
+		totalPages,
+		handleSearchMovies,
+		handleChangeTypedTitle,
+	} = useSearch();
+
 	return (
 		<SearchMoviesContainer>
 			<SearchSection>
 				<SearchMoviesHeader>Search</SearchMoviesHeader>
-				<Search />
+				<Search
+					searchType="ALL"
+					handleSearchMovies={handleSearchMovies}
+					handleChangeTypedTitle={handleChangeTypedTitle}
+				/>
 			</SearchSection>
-			<MoviesSearchList />
-			<Pagination count={3} />
+			<MoviesSearchList movies={movies} />
+			{page ? (
+				<Pagination
+					page={page}
+					count={totalPages}
+					handleSearchOnPageChange={handleSearchMovies}
+				/>
+			) : null}
 		</SearchMoviesContainer>
 	);
 };

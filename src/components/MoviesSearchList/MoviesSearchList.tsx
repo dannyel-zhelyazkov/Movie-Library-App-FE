@@ -1,17 +1,22 @@
-import { useHistory } from 'react-router';
-import { MovieItem } from '..';
+import { SearchMovieItem } from '../../store';
 import { MoviesList } from './StyledMoviesList';
+import { MovieItem } from '..';
+import { FC } from 'react';
 
-export const MoviesSearchList = () => {
-	const { push } = useHistory();
+interface MoviesSearchListProps {
+	movies: Array<SearchMovieItem>;
+}
 
+export const MoviesSearchList: FC<MoviesSearchListProps> = ({ movies }) => {
 	return (
 		<MoviesList>
-			{[1, 2, 3].map(() => (
-				<li onClick={() => push('/details/asd')}>
-					<MovieItem />
-				</li>
-			))}
+			{movies
+				? movies.map((movie: SearchMovieItem) => (
+						<li key={movie.id}>
+							<MovieItem movie={movie} />
+						</li>
+				  ))
+				: null}
 		</MoviesList>
 	);
 };

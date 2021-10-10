@@ -35,7 +35,7 @@ export const FavoriteMovies = () => {
 					</FavoriteMovieWrapper>
 				))}
 			</FavoriteMoviesList>
-			<Pagination count={10} />
+			<Pagination page={1} count={10} />
 		</FavoriteMoviesContainer>
 	);
 };
