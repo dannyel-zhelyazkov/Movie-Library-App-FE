@@ -1,4 +1,4 @@
-import { CardActions, CardContent, CardHeader, CardMedia } from '@mui/material';
+import { CardActions, CardContent, CardMedia } from '@mui/material';
 import { FC, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { FavoriteButton } from '..';
@@ -7,6 +7,7 @@ import {
 	MovieItemContainer,
 	MovieItemContent,
 	MovieItemContentDescription,
+	MovieItemHeader,
 	RedirectWrapper,
 	VisitOfficialSiteLink,
 } from './StyledMovieItem';
@@ -52,9 +53,9 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 				cardMedia
 			)}
 			<MovieItemContent onClick={(e) => e.stopPropagation()}>
-				<CardHeader
+				<MovieItemHeader
 					title={`${movie.title} (${movie.releaseDate})`}
-					subheader="Drama, Thriller, Comedy | 90 minutes"
+					subheader={movie.genres.join(', ')}
 				/>
 				<CardContent>
 					<MovieItemContentDescription>
@@ -65,7 +66,7 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 					</VisitOfficialSiteLink>
 				</CardContent>
 				<CardActions disableSpacing>
-					<FavoriteButton isFavorite />
+					<FavoriteButton />
 				</CardActions>
 			</MovieItemContent>
 		</MovieItemContainer>

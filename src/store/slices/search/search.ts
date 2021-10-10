@@ -28,7 +28,7 @@ const searchSlice = createSlice({
 		},
 		searchFailure: (state, action) => {
 			state.isLoading = false;
-			state.error = action.payload;
+			state.error = { ...action.payload };
 		},
 		clearSearchMovies: (state) => {
 			state.isLoading = initialState.isLoading;
@@ -51,12 +51,21 @@ export const searchMovie =
 			const movies = (data as SearchMovieItems).items;
 			const totalPages = (data as SearchMovieItems).pages;
 
-			dispatch(searchSuccess({ searchQuery: title, movies, totalPages, page }));
+			dispatch(
+				searchSuccess({
+					searchQuery: title,
+					movies,
+					totalPages,
+					page: movies.length === 0 ? 0 : page,
+				}),
+			);
 		} catch (err) {
 			dispatch(searchFailure(err));
 		}
 	};
 
+export const selectSearchMoviesIsLoading = (state: RootState) =>
+	state.search.isLoading;
 export const selectSearchMovies = (state: RootState) => state.search.movies;
 export const selectSearchPages = (state: RootState) => state.search.totalPages;
 export const selectSearchPage = (state: RootState) => state.search.page;

@@ -2,7 +2,7 @@ export interface SearchMovieItem {
 	id: number;
 	title: string;
 	poster: string;
-	genreIds: Array<number>;
+	genres: Array<string>;
 	releaseDate: string;
 	description: string;
 	officialPage: string;

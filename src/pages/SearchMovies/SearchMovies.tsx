@@ -1,4 +1,6 @@
+import { CircularProgress } from '@mui/material';
 import { MoviesSearchList, Pagination, Search } from '../../components';
+import { theme } from '../../const';
 import { useSearch } from '../../hooks/useSearch';
 import {
 	SearchMoviesContainer,
@@ -8,6 +10,7 @@ import {
 
 export const SearchMovies = () => {
 	const {
+		isLoading,
 		movies,
 		page,
 		totalPages,
@@ -21,12 +24,16 @@ export const SearchMovies = () => {
 				<SearchMoviesHeader>Search</SearchMoviesHeader>
 				<Search
 					searchType="ALL"
-					handleSearchMovies={handleSearchMovies}
+					handleSearchMovies={() => handleSearchMovies()}
 					handleChangeTypedTitle={handleChangeTypedTitle}
 				/>
 			</SearchSection>
-			<MoviesSearchList movies={movies} />
-			{page ? (
+			{isLoading ? (
+				<CircularProgress sx={{ color: theme.colors.secondary }} />
+			) : (
+				<MoviesSearchList movies={movies} />
+			)}
+			{page !== 0 ? (
 				<Pagination
 					page={page}
 					count={totalPages}
