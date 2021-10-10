@@ -48,15 +48,14 @@ export const searchMovie =
 				params: { page, title },
 			});
 
-			const movies = (data as SearchMovieItems).items;
-			const totalPages = (data as SearchMovieItems).pages;
+			const { items, pages } = data as SearchMovieItems;
 
 			dispatch(
 				searchSuccess({
 					searchQuery: title,
-					movies,
-					totalPages,
-					page: movies.length === 0 ? 0 : page,
+					movies: items,
+					totalPages: pages,
+					page: items.length === 0 ? 0 : page,
 				}),
 			);
 		} catch (err) {

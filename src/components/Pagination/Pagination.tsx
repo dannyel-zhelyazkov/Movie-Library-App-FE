@@ -4,7 +4,7 @@ import { PaginationContainer } from './StyledPagination';
 interface PaginationProps {
 	count: number;
 	page: number;
-	handleSearchOnPageChange?: (page: number) => void;
+	handleSearchOnPageChange: (page: number) => void;
 }
 
 export const Pagination: FC<PaginationProps> = ({
