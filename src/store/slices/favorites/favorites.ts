@@ -11,6 +11,8 @@ const initialState: FavoritesState = {
 	page: 0,
 	totalPages: 0,
 	error: null,
+	cleared: true,
+	initialLoad: true,
 };
 
 const favoritesSlice = createSlice({
@@ -26,10 +28,14 @@ const favoritesSlice = createSlice({
 			state.favoritesIds = action.payload.favoritesIds;
 			state.page = action.payload.page;
 			state.totalPages = action.payload.totalPages;
+			state.title = action.payload.title;
+			state.cleared = false;
+			state.initialLoad = action.payload.initialLoad;
 		},
 		fetchFavoritesFailure: (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
+			state.cleared = true;
 		},
 		addToFavoritesStart: (state) => {
 			state.isLoading = true;
@@ -62,16 +68,22 @@ const favoritesSlice = createSlice({
 			state.isLoading = false;
 			state.error = action.payload;
 		},
+		clearTitle: (state) => {
+			state.title = initialState.title;
+			state.cleared = true;
+		},
 	},
 });
 
 export const fetchFavorites =
-	(page: number) => async (dispatch: AppDispatch) => {
+	(page: number, title?: string, initialLoad?: boolean) =>
+	async (dispatch: AppDispatch) => {
 		dispatch(fetchFavoritesStart());
 		try {
 			const res = await client.get('/favorites', {
 				params: {
 					page,
+					title,
 				},
 			});
 
@@ -84,6 +96,8 @@ export const fetchFavorites =
 					favorites,
 					totalPages,
 					favoritesIds,
+					title,
+					initialLoad,
 				}),
 			);
 		} catch (err) {
@@ -121,10 +135,16 @@ export const removeFromFavorites =
 	};
 
 export const selectFavorites = (state: RootState) => state.favorites;
+export const selectFavoritesIsLoading = (state: RootState) =>
+	state.favorites.isLoading;
+export const selectFavoritesTitle = (state: RootState) => state.favorites.title;
 export const selectFavoritesPage = (state: RootState) => state.favorites.page;
 export const selectFavoritesTotalPages = (state: RootState) =>
 	state.favorites.totalPages;
-
+export const selectFavoritesCleared = (state: RootState) =>
+	state.favorites.cleared;
+export const selectFavoritesInitialLoad = (state: RootState) =>
+	state.favorites.initialLoad;
 export const {
 	fetchFavoritesStart,
 	fetchFavoritesSuccess,
@@ -135,5 +155,6 @@ export const {
 	removeFromFavoritesStart,
 	removeFromFavoritesSuccess,
 	removeFromFavoritesFailure,
+	clearTitle,
 } = favoritesSlice.actions;
 export const favoritesReducer = favoritesSlice.reducer;

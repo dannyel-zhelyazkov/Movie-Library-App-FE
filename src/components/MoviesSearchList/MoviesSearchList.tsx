@@ -12,7 +12,7 @@ export const MoviesSearchList: FC<MoviesSearchListProps> = ({ movies }) => {
 	const title = useAppSelector(selectSearchMoviesTitle);
 
 	const noResults =
-		title && movies.length === 0 ? <p>No movies was found</p> : null;
+		title && movies.length === 0 ? <p>No movies was found!</p> : null;
 
 	return (
 		<MoviesList>

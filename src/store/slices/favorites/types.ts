@@ -9,6 +9,8 @@ export interface FavoritesState {
 	page: number;
 	totalPages: number;
 	error: string | null;
+	cleared: boolean;
+	initialLoad: boolean;
 }
 
 export interface FavoriteMovies {

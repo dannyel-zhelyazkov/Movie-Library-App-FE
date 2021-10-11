@@ -15,6 +15,7 @@ export interface SearchState {
 	totalPages: number;
 	movies: Array<SearchMovieItem>;
 	error: string | null;
+	cleared: boolean;
 }
 
 export interface SearchMovieItems {

@@ -10,6 +10,7 @@ import {
 
 export const SearchMovies = () => {
 	const {
+		typedTitle,
 		isLoading,
 		movies,
 		page,
@@ -23,8 +24,8 @@ export const SearchMovies = () => {
 			<SearchSection>
 				<SearchMoviesHeader>Search</SearchMoviesHeader>
 				<Search
-					searchType="ALL"
-					handleSearchMovies={() => handleSearchMovies()}
+					value={typedTitle}
+					handleSearch={() => handleSearchMovies()}
 					handleChangeTypedTitle={handleChangeTypedTitle}
 				/>
 			</SearchSection>
