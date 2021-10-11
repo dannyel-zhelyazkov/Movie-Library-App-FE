@@ -4,6 +4,7 @@ import {
 	clearSearchMovies,
 	searchMovie,
 	selectSearchMovies,
+	selectSearchMoviesCleared,
 	selectSearchMoviesIsLoading,
 	selectSearchMoviesTitle,
 	selectSearchPage,
@@ -18,8 +19,9 @@ export const useSearch = () => {
 	const totalPages = useAppSelector(selectSearchPages);
 	const page = useAppSelector(selectSearchPage);
 	const title = useAppSelector(selectSearchMoviesTitle);
+	const cleared = useAppSelector(selectSearchMoviesCleared);
 
-	const [typedTitle, setTypedTitle] = useState<string | null>(null);
+	const [typedTitle, setTypedTitle] = useState<string | undefined>(undefined);
 
 	const handleSearchMovies = useCallback(
 		async (newPage?: number) => {
@@ -46,11 +48,14 @@ export const useSearch = () => {
 
 	useEffect(() => {
 		return () => {
-			dispatch(clearSearchMovies());
+			if (!cleared) {
+				dispatch(clearSearchMovies());
+			}
 		};
-	}, [dispatch]);
+	}, [dispatch, cleared]);
 
 	return {
+		typedTitle,
 		isLoading,
 		movies,
 		totalPages,

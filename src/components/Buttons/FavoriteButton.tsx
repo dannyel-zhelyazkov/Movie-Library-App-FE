@@ -7,11 +7,15 @@ import { theme } from '../../const';
 
 interface FavoriteButtonProps {
 	isFavorite?: boolean;
+	handleClick: () => void;
 }
 
-export const FavoriteButton: FC<FavoriteButtonProps> = ({ isFavorite }) => {
+export const FavoriteButton: FC<FavoriteButtonProps> = ({
+	isFavorite,
+	handleClick,
+}) => {
 	return (
-		<CustomButton bg={theme.colors.secondary}>
+		<CustomButton bg={theme.colors.secondary} onClick={handleClick}>
 			<FontAwesomeIcon
 				size="2x"
 				color={isFavorite ? theme.colors.primary : 'white'}

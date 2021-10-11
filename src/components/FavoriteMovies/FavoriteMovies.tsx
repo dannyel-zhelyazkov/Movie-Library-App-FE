@@ -1,7 +1,8 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
-import { MoviePoster } from '..';
-import { Pagination } from '../Pagination';
+import { MoviePoster, Pagination } from '..';
+import { useAppDispatch, useFavorites } from '../../hooks';
+import { FavoriteMovie, fetchFavorites } from '../../store/slices/favorites';
 import {
 	FavoriteMoviesContainer,
 	FavoriteMoviesHeader,
@@ -10,7 +11,18 @@ import {
 } from './StyledFavoriteMovies';
 
 export const FavoriteMovies = () => {
+	const dispatch = useAppDispatch();
 	const { push } = useHistory();
+	const {
+		isLoading,
+		cleared,
+		initialLoad,
+		favorites,
+		typedTitle,
+		page,
+		totalPages,
+		handleChangeFavoritesPage,
+	} = useFavorites();
 
 	const handlePushToDetailsPage = useCallback(
 		(id: number) => {
@@ -19,23 +31,50 @@ export const FavoriteMovies = () => {
 		[push],
 	);
 
+	const noResults = useMemo(
+		() =>
+			!isLoading && !typedTitle && favorites.length === 0 ? (
+				<p>No favorite movies with this name!</p>
+			) : null,
+		[isLoading, typedTitle, favorites.length],
+	);
+
+	useEffect(() => {
+		if (cleared && noResults && !initialLoad) {
+			dispatch(fetchFavorites(1));
+		}
+	}, [dispatch, cleared, noResults, initialLoad]);
+
 	return (
 		<FavoriteMoviesContainer>
 			<FavoriteMoviesHeader>Your Favorite</FavoriteMoviesHeader>
-			<FavoriteMoviesList container spacing={2}>
-				{[1, 2, 3, 4].map((id: number) => (
-					<FavoriteMovieWrapper
-						item
-						xs={6}
-						sm={4}
-						m={3}
-						lg={2}
-						onClick={() => handlePushToDetailsPage(id)}>
-						<MoviePoster />
-					</FavoriteMovieWrapper>
-				))}
-			</FavoriteMoviesList>
-			<Pagination page={1} count={10} />
+
+			{favorites.length !== 0 ? (
+				<FavoriteMoviesList container spacing={{ xs: 0, lg: 2 }}>
+					{favorites.map((favorite: FavoriteMovie) => (
+						<FavoriteMovieWrapper
+							key={favorite.id}
+							item
+							xs={6}
+							sm={4}
+							m={3}
+							lg={2}
+							onClick={() => handlePushToDetailsPage(favorite.movieId)}>
+							<MoviePoster poster={favorite.poster} />
+						</FavoriteMovieWrapper>
+					))}
+				</FavoriteMoviesList>
+			) : (
+				noResults
+			)}
+
+			{page !== 0 ? (
+				<Pagination
+					page={page}
+					count={totalPages}
+					handleSearchOnPageChange={handleChangeFavoritesPage}
+				/>
+			) : null}
 		</FavoriteMoviesContainer>
 	);
 };

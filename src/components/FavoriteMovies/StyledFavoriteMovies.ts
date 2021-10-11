@@ -14,17 +14,15 @@ const FavoriteMoviesHeader = styled.h2`
 `;
 
 const FavoriteMoviesList = styled(Grid)`
+	display: flex;
 	justify-content: center;
 	margin: 2rem auto !important;
 `;
 
 const FavoriteMovieWrapper = styled(Grid)`
+	display: flex;
+	justify-content: center;
 	padding: 0 !important;
-	transition: all 0.2s;
-
-	&:hover {
-		transform: scale(1.05);
-	}
 `;
 
 export {

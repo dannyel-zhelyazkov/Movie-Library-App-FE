@@ -3,30 +3,25 @@ import { SearchButton } from '..';
 import { SearchContainer, SearchInput } from './StyledSearch';
 
 interface SearchProps {
-	searchType?: 'FAVORITE' | 'ALL';
-	handleSearchMovies?: () => void;
-	handleChangeTypedTitle?: (value: string) => void;
+	value?: string;
+	handleSearch: () => void;
+	handleChangeTypedTitle: (value: string) => void;
 }
 
 export const Search: FC<SearchProps> = ({
-	searchType,
-	handleSearchMovies,
+	value,
+	handleSearch,
 	handleChangeTypedTitle,
 }) => {
 	return (
 		<SearchContainer>
 			<SearchInput
 				type="text"
+				value={value ? value : ''}
 				placeholder="Search by movie title..."
-				onChange={(event) =>
-					handleChangeTypedTitle
-						? handleChangeTypedTitle(event.target.value)
-						: null
-				}
+				onChange={(event) => handleChangeTypedTitle(event.target.value)}
 			/>
-			<SearchButton
-				onClick={handleSearchMovies ? handleSearchMovies : () => {}}
-			/>
+			<SearchButton onClick={handleSearch} />
 		</SearchContainer>
 	);
 };
