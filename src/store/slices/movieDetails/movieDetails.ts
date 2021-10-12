@@ -8,10 +8,13 @@ const initialState: MovieDetailsState = {
 	movie: {
 		movieDetails: null,
 		rating: {
-			id: '',
+			id: null,
 			rating: null,
 		},
-		notes: null,
+		notes: {
+			id: null,
+			notes: null,
+		},
 	},
 	error: null,
 	cleared: true,
@@ -26,7 +29,7 @@ const movieDetailsSlice = createSlice({
 		},
 		fetchSingleMovieDetailsSuccess: (state, action) => {
 			state.isLoading = false;
-			state.movie = { ...state.movie, movieDetails: action.payload };
+			state.movie.movieDetails = action.payload;
 			state.cleared = false;
 		},
 		fetchSingleMovieDetailsFailure: (state, action) => {
@@ -38,7 +41,7 @@ const movieDetailsSlice = createSlice({
 		},
 		fetchSingleMovieDetailsRatingSuccess: (state, action) => {
 			state.isLoading = false;
-			state.movie = { ...state.movie, rating: action.payload };
+			state.movie.rating = action.payload;
 		},
 		fetchSingleMovieDetailsRatingFailure: (state, action) => {
 			state.isLoading = false;
@@ -49,7 +52,7 @@ const movieDetailsSlice = createSlice({
 		},
 		rateMovieSuccess: (state, action) => {
 			state.isLoading = false;
-			state.movie = { ...state.movie, rating: action.payload };
+			state.movie.rating = action.payload;
 		},
 		rateMovieFailure: (state, action) => {
 			state.isLoading = false;
@@ -60,10 +63,7 @@ const movieDetailsSlice = createSlice({
 		},
 		changeMovieRatingSuccess: (state, action) => {
 			state.isLoading = false;
-			state.movie = {
-				...state.movie,
-				rating: { ...state.movie.rating, rating: action.payload },
-			};
+			state.movie.rating.rating = action.payload;
 		},
 		changeMovieRatingFailure: (state, action) => {
 			state.isLoading = false;
@@ -74,12 +74,52 @@ const movieDetailsSlice = createSlice({
 		},
 		removeRatingSuccess: (state) => {
 			state.isLoading = false;
-			state.movie = {
-				...state.movie,
-				rating: initialState.movie.rating,
-			};
+			state.movie.rating = initialState.movie.rating;
 		},
 		removeRatingFailure: (state, action) => {
+			state.error = action.payload;
+		},
+		fetchNotesStart: (state) => {
+			state.isLoading = true;
+		},
+		fetchNotesSuccess: (state, action) => {
+			state.isLoading = false;
+			state.movie.notes = action.payload;
+		},
+		fetchNotesFailure: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		addNotesStart: (state) => {
+			state.isLoading = true;
+		},
+		addNotesSuccess: (state, action) => {
+			state.isLoading = false;
+			state.movie.notes = action.payload;
+		},
+		addNotesFailure: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		changeNotesStart: (state) => {
+			state.isLoading = true;
+		},
+		changeNotesSuccess: (state, action) => {
+			state.isLoading = false;
+			state.movie.notes.notes = action.payload;
+		},
+		changeNotesFailure: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		removeNotesStart: (state) => {
+			state.isLoading = true;
+		},
+		removeNotesSuccess: (state) => {
+			state.isLoading = false;
+			state.movie.notes = initialState.movie.notes;
+		},
+		removeNotesFailure: (state, action) => {
 			state.error = action.payload;
 		},
 		clearMovieDetails: (state) => {
@@ -137,14 +177,13 @@ export const rateMovie =
 export const changeMovieRating =
 	(movieId: number, rating: number) => async (dispatch: AppDispatch) => {
 		dispatch(changeMovieRatingStart());
-
 		try {
-			const { data } = await client.put('/ratings', {
+			await client.put('/ratings', {
 				movieId,
 				rating,
 			});
 
-			dispatch(changeMovieRatingSuccess(data.rating));
+			dispatch(changeMovieRatingSuccess(rating));
 		} catch (err) {
 			dispatch(changeMovieRatingFailure(err));
 		}
@@ -158,6 +197,51 @@ export const removeRating = (id: string) => async (dispatch: AppDispatch) => {
 		dispatch(removeRatingSuccess());
 	} catch (err) {
 		dispatch(removeRatingFailure(err));
+	}
+};
+
+export const fetchNotes =
+	(movieId: number) => async (dispatch: AppDispatch) => {
+		try {
+			const res = await client.get(`/notes/${movieId}`);
+
+			dispatch(fetchNotesSuccess(res.data));
+		} catch (err) {
+			dispatch(fetchNotesFailure(err));
+		}
+	};
+
+export const addNotes =
+	(movieId: number, notes: string) => async (dispatch: AppDispatch) => {
+		dispatch(addNotesStart());
+		try {
+			const res = await client.post('/notes', { movieId, notes });
+
+			dispatch(addNotesSuccess(res.data));
+		} catch (err) {
+			dispatch(addNotesFailure(err));
+		}
+	};
+
+export const changeNotes =
+	(movieId: number, notes: string) => async (dispatch: AppDispatch) => {
+		dispatch(changeNotesStart());
+		try {
+			await client.put('/notes', { movieId, notes });
+
+			dispatch(changeNotesSuccess(notes));
+		} catch (err) {
+			dispatch(changeNotesFailure(err));
+		}
+	};
+
+export const removeNotes = (id: string) => async (dispatch: AppDispatch) => {
+	dispatch(removeNotesStart());
+	try {
+		await client.delete(`/notes/${id}`);
+		dispatch(removeNotesSuccess());
+	} catch (err) {
+		dispatch(removeNotesFailure(err));
 	}
 };
 
@@ -182,6 +266,18 @@ export const {
 	removeRatingStart,
 	removeRatingSuccess,
 	removeRatingFailure,
+	fetchNotesStart,
+	fetchNotesSuccess,
+	fetchNotesFailure,
+	addNotesStart,
+	addNotesSuccess,
+	addNotesFailure,
+	changeNotesStart,
+	changeNotesSuccess,
+	changeNotesFailure,
+	removeNotesStart,
+	removeNotesSuccess,
+	removeNotesFailure,
 	clearMovieDetails,
 } = movieDetailsSlice.actions;
 

@@ -10,10 +10,15 @@ export interface MovieDetailsState {
 export interface DetailedMovie {
 	movieDetails: Movie | null;
 	rating: Rating;
-	notes: string | null;
+	notes: Notes;
 }
 
 export interface Rating {
-	id: string;
+	id: string | null;
 	rating: number | null;
+}
+
+export interface Notes {
+	id: string | null;
+	notes: string | null;
 }
