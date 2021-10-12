@@ -2,7 +2,7 @@ import { CardActions, CardContent, CardMedia } from '@mui/material';
 import { FC, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { FavoriteButton } from '..';
-import { SearchMovieItem, selectFavorites } from '../../store';
+import { Movie, selectFavorites } from '../../store';
 import {
 	MovieItemContainer,
 	MovieItemContent,
@@ -15,7 +15,7 @@ import imageNotFound from '../../assets/images/not-found.png';
 import { useAppSelector, useFavorites } from '../../hooks';
 
 interface MovieItemProps {
-	movie?: SearchMovieItem;
+	movie: Movie;
 	isDetailsPage?: boolean;
 }
 
@@ -77,9 +77,10 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 						handleClick={() => {
 							if (favorite) {
 								handleRemoveFromFavorites(favorite.id);
-							} else {
-								handleAddToFavorites(`${movie.id}`, movie.title, movie.poster);
+								return;
 							}
+
+							handleAddToFavorites(`${movie.id}`, movie.title, movie.poster);
 						}}
 					/>
 				</CardActions>

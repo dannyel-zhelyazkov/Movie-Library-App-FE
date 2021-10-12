@@ -1,10 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { searchReducer, favoritesReducer } from './slices';
+import { searchReducer, favoritesReducer, movieDetailsReducer } from './slices';
 
 export const store = configureStore({
 	reducer: {
 		search: searchReducer,
 		favorites: favoritesReducer,
+		movieDetails: movieDetailsReducer,
 	},
 	devTools: process.env.NODE_ENV !== 'production',
 });

@@ -1,4 +1,3 @@
-import { Rating } from '@mui/material';
 import styled from 'styled-components';
 
 const MovieDetailsContainer = styled.div`
@@ -20,15 +19,6 @@ const MovieDetailsReviewHeader = styled.h3`
 	margin-bottom: 1rem;
 `;
 
-const MovieDetailsReviewRating = styled(Rating)`
-	margin-bottom: 1rem;
-	width: fit-content;
-
-	& > label > span.MuiRating-iconFilled {
-		color: ${({ theme }) => theme.colors.secondary};
-	}
-`;
-
 const MovieDetailsNote = styled.textarea`
 	width: 30rem;
 	height: 10rem;
@@ -46,6 +36,5 @@ export {
 	MovieDetailsContent,
 	MovieDetailsReview,
 	MovieDetailsReviewHeader,
-	MovieDetailsReviewRating,
 	MovieDetailsNote,
 };
