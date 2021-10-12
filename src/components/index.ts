@@ -7,3 +7,4 @@ export * from './Pagination';
 export * from './MovieItem';
 export * from './MoviePoster';
 export * from './MoviesSearchList';
+export * from './StarsRating';

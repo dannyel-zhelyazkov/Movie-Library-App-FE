@@ -1,4 +1,4 @@
-export interface SearchMovieItem {
+export interface Movie {
 	id: number;
 	title: string;
 	poster: string;
@@ -13,12 +13,12 @@ export interface SearchState {
 	searchQuery: string | null;
 	page: number;
 	totalPages: number;
-	movies: Array<SearchMovieItem>;
+	movies: Array<Movie>;
 	error: string | null;
 	cleared: boolean;
 }
 
 export interface SearchMovieItems {
-	items: Array<SearchMovieItem>;
+	items: Array<Movie>;
 	pages: number;
 }
