@@ -16,6 +16,7 @@ export const FavoriteMovies = () => {
 	const {
 		error,
 		isLoading,
+		edgeLengthChanged,
 		cleared,
 		initialLoad,
 		favorites,
@@ -36,6 +37,8 @@ export const FavoriteMovies = () => {
 		() =>
 			error ? (
 				error
+			) : !isLoading && favorites.length === 0 ? (
+				<p>No favorite movies! </p>
 			) : !isLoading && !typedTitle && favorites.length === 0 ? (
 				<p>No favorite movies with this name!</p>
 			) : null,
@@ -43,10 +46,10 @@ export const FavoriteMovies = () => {
 	);
 
 	useEffect(() => {
-		if (cleared && noResults && !initialLoad) {
+		if ((cleared && noResults && !initialLoad) || edgeLengthChanged) {
 			dispatch(fetchFavorites(1));
 		}
-	}, [dispatch, cleared, noResults, initialLoad]);
+	}, [dispatch, cleared, noResults, initialLoad, edgeLengthChanged]);
 
 	return (
 		<FavoriteMoviesContainer>

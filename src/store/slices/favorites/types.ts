@@ -11,6 +11,7 @@ export interface FavoritesState {
 	error: string | null;
 	cleared: boolean;
 	initialLoad: boolean;
+	edgeLengthChanged: boolean;
 }
 
 export interface FavoriteMovies {

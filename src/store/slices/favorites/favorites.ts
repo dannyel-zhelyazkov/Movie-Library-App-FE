@@ -13,6 +13,7 @@ const initialState: FavoritesState = {
 	error: null,
 	cleared: true,
 	initialLoad: true,
+	edgeLengthChanged: false,
 };
 
 const favoritesSlice = createSlice({
@@ -31,6 +32,7 @@ const favoritesSlice = createSlice({
 			state.title = action.payload.title;
 			state.cleared = false;
 			state.initialLoad = action.payload.initialLoad;
+			state.edgeLengthChanged = false;
 		},
 		fetchFavoritesFailure: (state, action) => {
 			state.isLoading = false;
@@ -44,6 +46,8 @@ const favoritesSlice = createSlice({
 			state.isLoading = false;
 			if (state.favorites.length < 4) {
 				state.favorites.push({ ...action.payload });
+			} else {
+				state.edgeLengthChanged = true;
 			}
 			state.favoritesIds.push({
 				id: action.payload.id,
@@ -59,6 +63,9 @@ const favoritesSlice = createSlice({
 		},
 		removeFromFavoritesSuccess: (state, action) => {
 			state.isLoading = false;
+			if (state.favorites.length === 1) {
+				state.edgeLengthChanged = true;
+			}
 			state.favorites = state.favorites.filter((f) => f.id !== action.payload);
 			state.favoritesIds = state.favoritesIds.filter(
 				(fid) => fid.id !== action.payload,
@@ -80,12 +87,9 @@ export const fetchFavorites =
 	async (dispatch: AppDispatch) => {
 		dispatch(fetchFavoritesStart());
 		try {
-			const res = await client.get('/favorites', {
-				params: {
-					page,
-					title,
-				},
-			});
+			const res = await client.get(
+				`/favorites?page=${page}&title=${title ? title : ''}`,
+			);
 
 			const { favorites, totalPages, favoritesIds } =
 				res.data as FavoriteMovies;
@@ -135,6 +139,8 @@ export const removeFromFavorites =
 	};
 
 export const selectFavorites = (state: RootState) => state.favorites;
+export const selectFavoritesEdgeLengthChanged = (state: RootState) =>
+	state.favorites.edgeLengthChanged;
 export const selectFavoritesError = (state: RootState) => state.favorites.error;
 export const selectFavoritesIsLoading = (state: RootState) =>
 	state.favorites.isLoading;
