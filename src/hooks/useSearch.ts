@@ -5,6 +5,7 @@ import {
 	searchMovie,
 	selectSearchMovies,
 	selectSearchMoviesCleared,
+	selectSearchMoviesError,
 	selectSearchMoviesIsLoading,
 	selectSearchMoviesTitle,
 	selectSearchPage,
@@ -14,6 +15,7 @@ import {
 export const useSearch = () => {
 	const dispatch = useAppDispatch();
 
+	const error = useAppSelector(selectSearchMoviesError);
 	const isLoading = useAppSelector(selectSearchMoviesIsLoading);
 	const movies = useAppSelector(selectSearchMovies);
 	const totalPages = useAppSelector(selectSearchPages);
@@ -55,6 +57,7 @@ export const useSearch = () => {
 	}, [dispatch, cleared]);
 
 	return {
+		error,
 		typedTitle,
 		isLoading,
 		movies,

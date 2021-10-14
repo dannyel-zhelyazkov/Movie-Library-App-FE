@@ -10,6 +10,7 @@ import {
 
 export const SearchMovies = () => {
 	const {
+		error,
 		typedTitle,
 		isLoading,
 		movies,
@@ -31,6 +32,8 @@ export const SearchMovies = () => {
 			</SearchSection>
 			{isLoading ? (
 				<CircularProgress sx={{ color: theme.colors.secondary }} />
+			) : error ? (
+				<p>{error}</p>
 			) : (
 				<MoviesSearchList movies={movies} />
 			)}

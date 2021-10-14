@@ -100,8 +100,8 @@ export const fetchFavorites =
 					initialLoad,
 				}),
 			);
-		} catch (err) {
-			dispatch(fetchFavoritesFailure(err));
+		} catch (err: any) {
+			dispatch(fetchFavoritesFailure(err.message));
 		}
 	};
 
@@ -117,8 +117,8 @@ export const addToFavorites =
 			});
 
 			dispatch(addToFavoritesSuccess(data));
-		} catch (err) {
-			dispatch(addToFavoritesFailure(err));
+		} catch (err: any) {
+			dispatch(addToFavoritesFailure(err.message));
 		}
 	};
 
@@ -129,12 +129,13 @@ export const removeFromFavorites =
 			await client.delete(`/favorites/${id}`);
 
 			dispatch(removeFromFavoritesSuccess(id));
-		} catch (err) {
-			dispatch(removeFromFavoritesFailure(err));
+		} catch (err: any) {
+			dispatch(removeFromFavoritesFailure(err.message));
 		}
 	};
 
 export const selectFavorites = (state: RootState) => state.favorites;
+export const selectFavoritesError = (state: RootState) => state.favorites.error;
 export const selectFavoritesIsLoading = (state: RootState) =>
 	state.favorites.isLoading;
 export const selectFavoritesTitle = (state: RootState) => state.favorites.title;

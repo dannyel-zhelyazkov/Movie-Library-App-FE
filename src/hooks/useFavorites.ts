@@ -7,6 +7,7 @@ import {
 	removeFromFavorites,
 	selectFavorites,
 	selectFavoritesCleared,
+	selectFavoritesError,
 	selectFavoritesInitialLoad,
 	selectFavoritesIsLoading,
 	selectFavoritesPage,
@@ -17,6 +18,7 @@ import {
 export const useFavorites = () => {
 	const dispatch = useAppDispatch();
 
+	const error = useAppSelector(selectFavoritesError);
 	const isLoading = useAppSelector(selectFavoritesIsLoading);
 	const cleared = useAppSelector(selectFavoritesCleared);
 	const initialLoad = useAppSelector(selectFavoritesInitialLoad);
@@ -73,6 +75,7 @@ export const useFavorites = () => {
 	}, [dispatch, title]);
 
 	return {
+		error,
 		isLoading,
 		cleared,
 		initialLoad,

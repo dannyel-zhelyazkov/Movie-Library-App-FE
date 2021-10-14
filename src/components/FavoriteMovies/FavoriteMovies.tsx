@@ -14,6 +14,7 @@ export const FavoriteMovies = () => {
 	const dispatch = useAppDispatch();
 	const { push } = useHistory();
 	const {
+		error,
 		isLoading,
 		cleared,
 		initialLoad,
@@ -33,10 +34,12 @@ export const FavoriteMovies = () => {
 
 	const noResults = useMemo(
 		() =>
-			!isLoading && !typedTitle && favorites.length === 0 ? (
+			error ? (
+				error
+			) : !isLoading && !typedTitle && favorites.length === 0 ? (
 				<p>No favorite movies with this name!</p>
 			) : null,
-		[isLoading, typedTitle, favorites.length],
+		[isLoading, typedTitle, favorites.length, error],
 	);
 
 	useEffect(() => {
