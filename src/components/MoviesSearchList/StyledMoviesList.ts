@@ -7,6 +7,9 @@ const MoviesList = styled.ul`
 	align-items: center;
 
 	& > li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		margin-bottom: 2rem;
 	}

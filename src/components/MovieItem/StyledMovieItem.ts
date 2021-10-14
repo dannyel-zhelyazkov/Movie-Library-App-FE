@@ -8,12 +8,19 @@ const MovieItemContainer = styled(Card)`
 	padding: 0.5rem;
 
 	@media (max-width: ${({ theme }) => theme.devicesWidths.smallScreens}) {
-		width: 100%;
+		justify-content: center;
+		width: 70%;
 		flex-direction: column;
 	}
 `;
 
-const RedirectWrapper = styled.div`
+const RedirectWrapper = styled.div<{ image: string }>`
+	background-image: url(${({ image }) => image});
+	background-size: auto;
+	background-position: top;
+	background-repeat: no-repeat;
+	object-fit: cover;
+	height: 320px;
 	cursor: pointer;
 `;
 

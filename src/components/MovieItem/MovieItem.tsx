@@ -38,6 +38,9 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 
 	const cardMedia = movie ? (
 		<CardMedia
+			sx={{
+				objectFit: 'cover',
+			}}
 			component="img"
 			height="320"
 			image={
@@ -52,8 +55,14 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 	return movie ? (
 		<MovieItemContainer>
 			{!isDetailsPage ? (
-				<RedirectWrapper onClick={() => handlePushToDetailsPage(movie.id)}>
-					{cardMedia}
+				<RedirectWrapper
+					image={
+						movie.poster
+							? `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster}`
+							: imageNotFound
+					}
+					onClick={() => handlePushToDetailsPage(movie.id)}>
+					{/* {cardMedia} */}
 				</RedirectWrapper>
 			) : (
 				cardMedia
