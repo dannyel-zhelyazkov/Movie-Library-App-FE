@@ -1,4 +1,4 @@
-import { CardActions, CardContent, CardMedia } from '@mui/material';
+import { CardActions, CardContent } from '@mui/material';
 import { FC, useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { FavoriteButton } from '..';
@@ -8,6 +8,7 @@ import {
 	MovieItemContent,
 	MovieItemContentDescription,
 	MovieItemHeader,
+	MovieItemMedia,
 	RedirectWrapper,
 	VisitOfficialSiteLink,
 } from './StyledMovieItem';
@@ -37,32 +38,20 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, isDetailsPage }) => {
 	);
 
 	const cardMedia = movie ? (
-		<CardMedia
-			sx={{
-				objectFit: 'cover',
-			}}
-			component="img"
-			height="320"
+		<MovieItemMedia
 			image={
 				movie.poster
 					? `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster}`
 					: imageNotFound
 			}
-			alt={movie.title}
 		/>
 	) : null;
 
 	return movie ? (
 		<MovieItemContainer>
 			{!isDetailsPage ? (
-				<RedirectWrapper
-					image={
-						movie.poster
-							? `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster}`
-							: imageNotFound
-					}
-					onClick={() => handlePushToDetailsPage(movie.id)}>
-					{/* {cardMedia} */}
+				<RedirectWrapper onClick={() => handlePushToDetailsPage(movie.id)}>
+					{cardMedia}
 				</RedirectWrapper>
 			) : (
 				cardMedia

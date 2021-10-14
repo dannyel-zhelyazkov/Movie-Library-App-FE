@@ -140,8 +140,8 @@ export const fetchSingleMovieDetails =
 			const movie = res.data as Movie;
 
 			dispatch(fetchSingleMovieDetailsSuccess(movie));
-		} catch (err) {
-			dispatch(fetchSingleMovieDetailsFailure(err));
+		} catch (err: any) {
+			dispatch(fetchSingleMovieDetailsFailure(err.message));
 		}
 	};
 
@@ -154,8 +154,8 @@ export const fetchSingleMovieDetailsRating =
 			const rating = res.data as Rating;
 
 			dispatch(fetchSingleMovieDetailsRatingSuccess(rating));
-		} catch (err) {
-			dispatch(fetchSingleMovieDetailsRatingFailure(err));
+		} catch (err: any) {
+			dispatch(fetchSingleMovieDetailsRatingFailure(err.message));
 		}
 	};
 
@@ -169,8 +169,8 @@ export const rateMovie =
 			});
 
 			dispatch(rateMovieSuccess(data));
-		} catch (err) {
-			dispatch(rateMovieFailure(err));
+		} catch (err: any) {
+			dispatch(rateMovieFailure(err.message));
 		}
 	};
 
@@ -184,8 +184,8 @@ export const changeMovieRating =
 			});
 
 			dispatch(changeMovieRatingSuccess(rating));
-		} catch (err) {
-			dispatch(changeMovieRatingFailure(err));
+		} catch (err: any) {
+			dispatch(changeMovieRatingFailure(err.message));
 		}
 	};
 
@@ -195,8 +195,8 @@ export const removeRating = (id: string) => async (dispatch: AppDispatch) => {
 		await client.delete(`/ratings/${id}`);
 
 		dispatch(removeRatingSuccess());
-	} catch (err) {
-		dispatch(removeRatingFailure(err));
+	} catch (err: any) {
+		dispatch(removeRatingFailure(err.message));
 	}
 };
 
@@ -206,8 +206,8 @@ export const fetchNotes =
 			const res = await client.get(`/notes/${movieId}`);
 
 			dispatch(fetchNotesSuccess(res.data));
-		} catch (err) {
-			dispatch(fetchNotesFailure(err));
+		} catch (err: any) {
+			dispatch(fetchNotesFailure(err.message));
 		}
 	};
 
@@ -218,8 +218,8 @@ export const addNotes =
 			const res = await client.post('/notes', { movieId, notes });
 
 			dispatch(addNotesSuccess(res.data));
-		} catch (err) {
-			dispatch(addNotesFailure(err));
+		} catch (err: any) {
+			dispatch(addNotesFailure(err.message));
 		}
 	};
 
@@ -230,8 +230,8 @@ export const changeNotes =
 			await client.put('/notes', { movieId, notes });
 
 			dispatch(changeNotesSuccess(notes));
-		} catch (err) {
-			dispatch(changeNotesFailure(err));
+		} catch (err: any) {
+			dispatch(changeNotesFailure(err.message));
 		}
 	};
 
@@ -240,8 +240,8 @@ export const removeNotes = (id: string) => async (dispatch: AppDispatch) => {
 	try {
 		await client.delete(`/notes/${id}`);
 		dispatch(removeNotesSuccess());
-	} catch (err) {
-		dispatch(removeNotesFailure(err));
+	} catch (err: any) {
+		dispatch(removeNotesFailure(err.message));
 	}
 };
 

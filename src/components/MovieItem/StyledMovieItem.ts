@@ -6,6 +6,7 @@ const MovieItemContainer = styled(Card)`
 	border: 2px solid ${({ theme }) => theme.colors.secondary};
 	box-shadow: none !important;
 	padding: 0.5rem;
+	margin-bottom: 1rem;
 
 	@media (max-width: ${({ theme }) => theme.devicesWidths.smallScreens}) {
 		justify-content: center;
@@ -14,14 +15,23 @@ const MovieItemContainer = styled(Card)`
 	}
 `;
 
-const RedirectWrapper = styled.div<{ image: string }>`
+const RedirectWrapper = styled.div`
+	width: 100%;
+	cursor: pointer;
+`;
+
+const MovieItemMedia = styled.div<{ image: string }>`
 	background-image: url(${({ image }) => image});
 	background-size: auto;
 	background-position: top;
 	background-repeat: no-repeat;
 	object-fit: cover;
 	height: 320px;
-	cursor: pointer;
+	width: 244px;
+
+	@media (max-width: ${({ theme }) => theme.devicesWidths.smallScreens}) {
+		width: 100%;
+	}
 `;
 
 const MovieItemContent = styled.div`
@@ -67,6 +77,7 @@ const VisitOfficialSiteLink = styled.a`
 export {
 	MovieItemContainer,
 	RedirectWrapper,
+	MovieItemMedia,
 	MovieItemHeader,
 	MovieItemContentDescription,
 	MovieItemContent,
