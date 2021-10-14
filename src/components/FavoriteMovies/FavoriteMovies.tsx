@@ -16,11 +16,11 @@ export const FavoriteMovies = () => {
 	const {
 		error,
 		isLoading,
+		title,
 		edgeLengthChanged,
 		cleared,
 		initialLoad,
 		favorites,
-		typedTitle,
 		page,
 		totalPages,
 		handleChangeFavoritesPage,
@@ -37,12 +37,12 @@ export const FavoriteMovies = () => {
 		() =>
 			error ? (
 				error
+			) : title && !isLoading && favorites.length === 0 ? (
+				<p>No favorite movies with this name!</p>
 			) : !isLoading && favorites.length === 0 ? (
 				<p>No favorite movies! </p>
-			) : !isLoading && !typedTitle && favorites.length === 0 ? (
-				<p>No favorite movies with this name!</p>
 			) : null,
-		[isLoading, typedTitle, favorites.length, error],
+		[isLoading, title, favorites.length, error],
 	);
 
 	useEffect(() => {

@@ -17,6 +17,7 @@ const StyledStarsRating = styled(Rating)`
 const StyledClearRating = styled(FontAwesomeIcon)`
 	display: inline;
 	margin-left: 1rem;
+	cursor: pointer;
 `;
 
 export { StarsRatingContainer, StyledStarsRating, StyledClearRating };

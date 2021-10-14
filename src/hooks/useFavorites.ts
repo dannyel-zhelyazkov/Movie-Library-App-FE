@@ -78,6 +78,7 @@ export const useFavorites = () => {
 
 	return {
 		error,
+		title,
 		edgeLengthChanged,
 		isLoading,
 		cleared,
